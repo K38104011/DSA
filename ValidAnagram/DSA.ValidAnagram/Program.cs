@@ -60,6 +60,20 @@ bool IsAnagram(string s, string t)
 
     bool Solution2(string s, string t)
     {
-        return true;
+        if (s.Length != t.Length)
+        {
+            return false;
+        }
+
+        var charFrequency = new Dictionary<char, int>();
+        for (int i = 0; i < s.Length; i++)
+        {
+            charFrequency.TryAdd(s[i], 0);
+            charFrequency.TryAdd(t[i], 0);
+
+            charFrequency[s[i]]++;
+            charFrequency[t[i]]--;
+        }
+        return charFrequency.Values.All(frequency => frequency == 0);
     }
 }
